@@ -1,0 +1,72 @@
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: expenses_user
+      POSTGRES_PASSWORD: expenses_pass
+      POSTGRES_DB: expenses_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  auth-service:
+    build: ./auth-service
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: expenses_user
+      DB_PASSWORD: expenses_pass
+      DB_NAME: expenses_db
+      JWT_SECRET: supersecretkey
+    depends_on:
+      - db
+    ports:
+      - "8001:8001"
+
+  data-service:
+    build: ./data-service
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: expenses_user
+      DB_PASSWORD: expenses_pass
+      DB_NAME: expenses_db
+      AUTH_SERVICE_URL: http://auth-service:8001
+    depends_on:
+      - db
+      - auth-service
+    ports:
+      - "8000:8000"
+
+  analytics-service:
+    build: ./analitycs-service
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: expenses_user
+      DB_PASSWORD: expenses_pass
+      DB_NAME: expenses_db
+    depends_on:
+      - db
+      - data-service
+    ports:
+      - "9000:9000"
+
+  gateway:
+    build: ./gateway
+    environment:
+      AUTH_SERVICE_URL: http://auth-service:8001
+      DATA_SERVICE_URL: http://data-service:8000
+      ANALYTICS_SERVICE_URL: http://analytics-service:9000
+    depends_on:
+      - auth-service
+      - data-service
+      - analytics-service
+    ports:
+      - "8080:8080"
+
+networks:
+  default:
+    driver: bridge

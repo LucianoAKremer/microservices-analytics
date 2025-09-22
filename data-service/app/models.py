@@ -12,4 +12,3 @@ class Expense(BaseModel):
     date: str  # ISO format
     category_id: int
     user_id: Optional[int] = None
-

@@ -1,8 +1,6 @@
 fastapi
 uvicorn
 psycopg2-binary
-pandas
-jinja2
-python-jose
 requests
+python-jose
 

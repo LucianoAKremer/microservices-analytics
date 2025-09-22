@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   res.send('Auth Service funcionando');
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8001;
 app.listen(PORT, () => {
   console.log(`Auth Service escuchando en puerto ${PORT}`);
 });

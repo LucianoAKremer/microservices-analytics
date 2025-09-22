@@ -1,0 +1,8 @@
+express
+jsonwebtoken
+pg
+bcryptjs
+swagger-jsdoc
+swagger-ui-express
+body-parser
+
