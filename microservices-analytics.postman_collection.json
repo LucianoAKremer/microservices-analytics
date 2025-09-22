@@ -1,0 +1,584 @@
+{
+	"info": {
+		"_postman_id": "191278bb-0fd5-4259-9689-4deef91e355c",
+		"name": "microservices-analytics",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46275166",
+		"_collection_link": "https://lucianok-275381.postman.co/workspace/LucianoK's-Workspace~1670be20-1142-4fe9-8ed8-71655bc122ca/collection/46275166-191278bb-0fd5-4259-9689-4deef91e355c?action=share&source=collection_link&creator=46275166"
+	},
+	"item": [
+		{
+			"name": "Auth Service",
+			"item": [
+				{
+					"name": "Registro de usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"usuario2\",\r\n  \"password\": \"claveSegura\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login de usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"usuario2\",\r\n  \"password\": \"claveSegura\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verificación de token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/auth/verify",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"verify"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Data Service",
+			"item": [
+				{
+					"name": "Subir Expensa",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": 1500.0,\r\n  \"description\": \"Supermercado\",\r\n  \"date\": \"2024-06-10\",\r\n  \"category_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/data/expenses",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"data",
+								"expenses"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar gastos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/data/expenses",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"data",
+								"expenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear categoria",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Salud\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/data/categories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"data",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar categorias",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/data/categories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"data",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar gasto",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/expenses/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"expenses",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar categoría",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/data/categories/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"data",
+								"categories",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Analytics Service",
+			"item": [
+				{
+					"name": "Resumen general",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/analytics/stats/summary",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"analytics",
+								"stats",
+								"summary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Por categoría",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/analytics/stats/by-category",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"analytics",
+								"stats",
+								"by-category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tendencia mensual",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/analytics/stats/monthly",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"analytics",
+								"stats",
+								"monthly"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Top N gastos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/analytics/stats/monthly",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"analytics",
+								"stats",
+								"monthly"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(En app) Gráfico de barras por categoría",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/analytics/chart/bar-category",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"analytics",
+								"chart",
+								"bar-category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(En app) Gráfico de líneas mensual",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/analytics/stats/monthly",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"analytics",
+								"stats",
+								"monthly"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(En app) Gráfico de torta por categoría",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/analytics/chart/pie-category",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"analytics",
+								"chart",
+								"pie-category"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
