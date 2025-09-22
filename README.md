@@ -61,6 +61,10 @@ Incluye servicios independientes desplegados y orquestados con Docker Compose.
 ## 🧪 Ejemplos de requests
 Ver ejemplos detallados en la documentación de cada servicio y en los comentarios del código fuente.
 
+Usar el postman collection:
+Completar la variable "baseUrl" con el puerto al gateway.
+Completar la variable "token" con el token obtenido en el logueo.
+
 ## 💡 Próximos pasos
 - Añadir Swagger/OpenAPI para documentación interactiva (ya disponible en cada microservicio)
 - Integrar Kafka o RabbitMQ para eventos y comunicación asíncrona
@@ -70,3 +74,4 @@ Ver ejemplos detallados en la documentación de cada servicio y en los comentari
 ---
 
 **Desarrollado para arquitectura robusta, escalable y lista para producción.**
+
